@@ -11,9 +11,10 @@ from flask_gravatar import Gravatar
 from flask import abort
 from functools import wraps
 import smtplib
+import os
 
-OWN_EMAIL = 'send_msg2022@outlook.com'
-OWN_PASSWORD = 'P@$$w0rd9876'
+OWN_EMAIL = os.environ['OWN_EMAIL']
+OWN_PASSWORD = os.environ['OWN_PASSWORD']
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
