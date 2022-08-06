@@ -21,4 +21,4 @@ visitor
 Werkzeug
 WTForms
 flask_bootstrap
-gunicorn==20.1.0
+gunicorn
