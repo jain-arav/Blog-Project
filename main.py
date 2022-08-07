@@ -12,16 +12,17 @@ from flask import abort
 from functools import wraps
 import smtplib
 import os
+from boto.s3.connection import S3Connection
 
-OWN_EMAIL = os.environ['OWN_EMAIL']
-OWN_PASSWORD = os.environ['OWN_PASSWORD']
+OWN_EMAIL = S3Connection(os.environ['OWN_EMAIL'])
+OWN_PASSWORD = S3Connection(os.environ['OWN_PASSWORD'])
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '8BYkEfBA6O6donzWlSihBXox7C0sKR6b')
+app.config['SECRET_KEY'] = S3Connection(os.environ.get('SECRET_KEY')) #, '8BYkEfBA6O6donzWlSihBXox7C0sKR6b')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///blog.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = S3Connection(os.environ.get('DATABASE_URL')) #, 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
